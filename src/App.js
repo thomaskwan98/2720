@@ -1,11 +1,9 @@
 import './App.css';
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link} from "react-router-dom";
+import { useState } from 'react';
 import Login from './Login';
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./Login.css";
-
+import User from './User';
+import Admin from './Admin';
 
 function App() {
   const [email, setEmail] = useState("");
@@ -17,27 +15,20 @@ function App() {
     // Login page
     // User page
     // Admin page
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email </Form.Label>
-          <Form.Control autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password </Form.Label>
-          <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
-      </Form>
-
-    <BrowserRouter>
+<BrowserRouter>
       <div>
+        <ul>
+          <li><Link to='/'>Login</Link></li>
+          <li><Link to='/user'>User page</Link></li>
+          <li><Link to='/admin'>Admin page</Link></li>
+        </ul>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path='/user' element={<User/>} />
+          <Route path='/admin' element={<Admin/>} />
         </Routes>
       </div>
     </BrowserRouter>
-  </div>
 
 );
 
