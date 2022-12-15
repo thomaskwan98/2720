@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<venues>
+  <venue id="36310036">
+    <venuec>
+    <![CDATA[ 沙田大會堂 (文娛廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Sha Tin Town Hall (Cultural Activities Hall) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.38136 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.18990 ]]>
+    </longitude>
+  </venue>
+  <venue id="76810048">
+    <venuec>
+    <![CDATA[ 屯門大會堂 (演奏廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Tuen Mun Town Hall (Auditorium) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.391810 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 113.976771 ]]>
+    </longitude>
+  </venue>
+  <venue id="87210045">
+    <venuec>
+    <![CDATA[ 荃灣大會堂 (演奏廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Tsuen Wan Town Hall (Auditorium) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.37109 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.11277 ]]>
+    </longitude>
+  </venue>
+  <venue id="87310051">
+    <venuec>
+    <![CDATA[ 元朗劇院 (演藝廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Yuen Long Theatre (Auditorium) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.44152 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.02289 ]]>
+    </longitude>
+  </venue>
+  <venue id="87810041">
+    <venuec>
+    <![CDATA[ 上環文娛中心 (演講廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Sheung Wan Civic Centre (Lecture Hall) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.28602 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.14967 ]]>
+    </longitude>
+  </venue>
+  <venue id="50110014">
+    <venuec>
+    <![CDATA[ 香港文化中心 (音樂廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Hong Kong Cultural Centre (Concert Hall) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.29386 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.17053 ]]>
+    </longitude>
+  </venue>
+  <venue id="75010017">
+    <venuec>
+    <![CDATA[ 香港電影資料館 (電影院) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Hong Kong Film Archive (Cinema) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.285056 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.222075 ]]>
+    </longitude>
+  </venue>
+  <venue id="87110120">
+    <venuec>
+    <![CDATA[ 葵青劇院 (演講室) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Kwai Tsing Theatre (Lecture Room) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.35665 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.12623 ]]>
+    </longitude>
+  </venue>
+  <venue id="87410030">
+    <venuec>
+    <![CDATA[ 牛池灣文娛中心 (劇院) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ Ngau Chi Wan Civic Centre (Theatre) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.334583 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.208766 ]]>
+    </longitude>
+  </venue>
+  <venue id="3110031">
+    <venuec>
+    <![CDATA[ 北區大會堂 (演奏廳) ]]>
+    </venuec>
+    <venuee>
+    <![CDATA[ North District Town Hall (Auditorium) ]]>
+    </venuee>
+    <latitude>
+    <![CDATA[ 22.501639 ]]>
+    </latitude>
+    <longitude>
+    <![CDATA[ 114.128911 ]]>
+    </longitude>
+  </venue>
+</venues>
+ 
