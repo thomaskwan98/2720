@@ -1,4 +1,5 @@
 import React,{ Component} from "react";
+import './Login.css';
 
 class Login extends Component {
 
@@ -31,19 +32,40 @@ class Login extends Component {
   
     render() {
       return (
-        <div className="App">
-          <form className="form" onSubmit={this.handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="Username">Username</label>
-              <input type="text" name="Username" placeholder="Username" />
+          <div>
+            <div className="App">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="form-holder">
+                             <div class="form-content">
+                                 <div class="form-items">
+                                    <h3>Login page</h3>
+                                    <p>Fill in your user info</p>
+                                    <form className="form" class="requires-validation" onSubmit={this.handleSubmit}>
+                                        <div class="col-md-12">
+                                             <div className="input-group">
+                                                 <label htmlFor="Username">Username</label>
+                                                 <input type="text" name="Username" placeholder="Username" />
+                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                             <div className="input-group">
+                                                 <label htmlFor="password">password</label>
+                                                 <input type="password" name="password" />
+                                             </div>
+                                        </div>
+                                        <div class="form-button mt-3">
+                                             <button className="primary">Enter</button>
+                                        </div>
+                                    </form>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="input-group">
-              <label htmlFor="password">password</label>
-              <input type="password" name="password" />
-            </div>
-            <button className="primary">Enter</button>
-          </form>
         </div>
+
       );
     }
   }

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Link} from "react-router-dom";
 import { useState } from 'react';
 import Login from './Login';
 import User from './User';
-import Admin from './Admin';
+//import Admin from './Admin';
 
 function App() {
 
@@ -21,6 +21,5 @@ function App() {
 
 );
 }
-
 
 export default App;
