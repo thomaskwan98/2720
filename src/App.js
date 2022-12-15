@@ -29,19 +29,17 @@ function App() {
         </Form.Group>
         <Button block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
       </Form>
-
-    <BrowserRouter>
-      <div>
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  </div>
-
+      {/*
+      <BrowserRouter>
+        <div>
+          <Routes>
+            <Route path="/" element={<Login />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+      */}
+    </div>
 );
-
 }
-
 
 export default App;
