@@ -19,9 +19,66 @@ const login = new Schema({
     username : { type: String, required: true},
     password : { type: String, required: true},
     Identity :{ type: String, required: true},
-    });
+});
 
-    const User = mongoose.model("logins", login);
+const User = mongoose.model("logins", login);
+
+
+const eventSchema = Schema({
+    id: {type: String, required: true, unique: true},
+    titlec: {type: String},
+    titlee: {type: String},
+    cat1: {type: String},
+    predateC: {type: String},
+    predateE: {type: String},
+    progtimec: {type: String},
+    progtimee: {type: String},
+    venueid: {type: String, required: true, unique: true},
+    venue: {type: Schema.Types.ObjectId, ref:'locationModel'},
+    agelimitc: {type: String},
+    agelimite: {type: String},
+    pricec: {type: String},
+    pricee: {type: String},
+    descc: {type: String},
+    desce: {type: String},
+    urlc: {type: String},
+    urle: {type: String},
+    tagenturlc: {type: String},
+    tagenturle: {type: String},
+    remarkc: {type: String},
+    remarke: {type: String},
+    enquiry: {type: String},
+    fax : {type: String},
+    email : {type: String},
+    saledate: {type: String},
+    interbook: {type: String},
+    presenterorgc: {type: String},
+    presenterorge: {type: String},
+    prog_image : {type: String},
+    detail_image1 : {type: String},
+    detail_image2 : {type: String},
+    detail_image3 : {type: String},
+    detail_image4 : {type: String},
+    detail_image5 : {type: String},
+    video_link: {type: String},
+    video_link: {type: String},
+    video_link: {type: String},
+});
+
+const eventModel = mongoose.model("events", eventSchema);
+
+const venueSchema = Schema ({
+    id: {type: String, required: true, unique:true},
+    venuec: {type: String, required: true},
+    venuee: {type: String, required: true},
+    latitude: {type: String},
+    longitude: {type: String},
+    event: [{type: Schema.Types.ObjectId, ref:'eventModel'}],
+});
+
+const venueModel = mongoose.model('venues', venueSchema);
+
+
 
     app.post("/login", (req, res) => {
         console.log("in");

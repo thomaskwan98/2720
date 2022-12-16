@@ -9,37 +9,43 @@ import React, { useState } from 'react';
 
 import dataEventDates from './Data/eventDates.xml';
 import dataEvents from './Data/events.xml';
-import dataVenues from './Data/venues.xml';
+//import dataVenues from './Data/venues.xml';
 import XMLParser from 'react-xml-parser';
 
 const convert = require("xml2js");
+let venues = [{venueName:[], venueId:[],
+}];
 
 class User extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {venue:[],}      
+    this.state = {venueName:[], venues:[{venueName:[], venueId:[],
+    }], venueId:[], count:0}   
   }
+
 componentDidMount() {
  //get data request
-  axios.get(XMLData, {
+  axios.get(XMLData, dataEvents, {
   "Content-Type": "application/xml; charset=utf-8"
    }).then(res => {
     //Storing users detail in state array object
     const jsonDataFromXml = new XMLParser().parseFromString(res.data);
-    this.setState({ venue: jsonDataFromXml.getElementsByTagName('venuee') })
+    //this.setState({ venues: jsonDataFromXml.getElementsByTagName('venue') })
+    this.setState({ venueName: jsonDataFromXml.getElementsByTagName('venuee') })
+    this.setState({ venueId: jsonDataFromXml.getElementsByTagName('venue').id })
   }); 
 }
 
 render() {
 return (
-  <div className="container">   
-    <ul class="list-group"> 
-    {(this.state.venue.map((item, index) => {
+  <div className="container">
+  <ul class="list-group"> 
+    {(this.state.venueName.map((item, index) => {
     return (
     <li class="list-group-item">
       <div class="wrapper">
         <div class="link_wrapper">
-          <a href="#">{item.value}</a>
+          <a href=''>{item.value}</a>
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
               <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
