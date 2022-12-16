@@ -121,4 +121,19 @@ const venueModel = mongoose.model('venues', venueSchema);
             }
         });
     });
+
+    app.get('/user', (req, res) => {
+        //user action, table
+
+        //Find all docs that have at least two name array elements.
+        venueModel
+        .find({ 'event.2': {$exists: true} })
+        .exec( (err, item) => {
+            if (err) {res.send(err);}
+            else {
+                res.send(item.venuee + item.event.length);
+            }
+        });
+    });
+
 app.listen(5000);
