@@ -1,12 +1,44 @@
 import './User.css';
 import XMLData from './Data/venues.xml';
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
+import dataEventDates from './Data/eventDates.xml';
+import dataEvents from './Data/events.xml';
+import dataVenues from '.Data/venues.xml';
+import XMLParser from 'react-xml-parser';
 
 const convert = require("xml2js");
 
+class User extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {venue:[],}      
+  }
+componentDidMount() {
+ //get data request
+  axios.get('/Data/venues.xml', {
+    "Content-Type": "application/xml; charset=utf-8"
+   }).then(res => {
+    //Storing users detail in state array object
+    const jsonDataFromXml = new XMLParser().parseFromString(res.data);
+    this.setState({ venue: jsonDataFromXml.getElementsByTagName('venuee') })
+  }); 
+}
 
-function User() {
+render() {
+return (
+  <div className="container p-5">   
+    <ul class="list-group"> 
+    {(this.state.venue.map((item, index) => {
+    return (<li class="list-group-item">{item.value}</li>)}))}
+    </ul>
+    </div>
+)
+};
+}
+
+function User_() {
   const [data, setData] = useState(Array.from({ length: 10 }, v => Array.from({ length: 5 }, v => null)));
 
   var parseString = convert.parseString;
@@ -60,12 +92,11 @@ function User() {
 
   
 //make table
+
   return (
     <div className="User">
       <header className="User-header">
-<div>{print(0)}</div>
-
-   
+        <div>{print(0)}</div>
       </header>
     </div>
   );
