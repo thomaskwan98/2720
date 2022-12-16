@@ -86,8 +86,7 @@ const venueModel = mongoose.model('venues', venueSchema);
         console.log(req);
         console.log(req.body["name"]);
         User.findOne(
-            {Username: req.body["name"]}, (err, e) => {
-            console.log(e);
+            {username: req.body["name"]}, (err, e) => {
                 if (err) {
                     res.send(err);
                     console.log("no");
@@ -97,6 +96,7 @@ const venueModel = mongoose.model('venues', venueSchema);
                     res.send("no this user");
                 }
                 else {
+       
                     if (req.body["password"]!= e.password) {
                         res.status(401);
                         res.send("wrongPw");
