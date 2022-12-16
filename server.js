@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -8,8 +7,10 @@ app.use(cors());
 const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
-
-const bcrypt = require("bcrypt"); 
+const https = require('https');
+const axios = require('axios');
+const { repeat } = require("rxjs");
+var DOMParser = require('xmldom');
 
 mongoose.set('strictQuery', true);
 
@@ -53,15 +54,24 @@ const login = new Schema({
             });
         });
 
-    app.get("/", (req, res) => {
-        User.find({}, (err, e) => {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                res.status(200);
-                res.send(e);
-            }
-        });
+
+
+    app.post("/venue_upload",(req,res)=>{
+       console.log(req.body);
+    })
+
+
+
+
+    app.post('/xml', (req, res) => {
+ 
+        axios.get('https://www.lcsd.gov.hk/datagovhk/event/venues.xml').then((response) => {
+           res.send(response.data);
+    
+   
+            });
+        
     });
+
+
 app.listen(5000);
