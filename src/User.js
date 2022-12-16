@@ -43,15 +43,6 @@ return (
           </div>
         </div>
       </div>
-
-      {/*
-      <div class="center">
-        <a href="#" class="button">
-        {item.value}
-        </a>
-      </div>  
-      */}
-
     </li>
     )}))}
     </ul>

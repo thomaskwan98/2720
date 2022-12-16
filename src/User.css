@@ -9,23 +9,12 @@
     justify-content: center;
     align-items: center;
   }
-
-  body_{
-    font-family: 'Lato', sans-serif;
-  }
-  
-  .wrapper_{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
   
   .link_wrapper{
     position: relative;
   }
   
-  a{
+  .link_wrapper a{
     display: block;
     height: 50px;
     /*
