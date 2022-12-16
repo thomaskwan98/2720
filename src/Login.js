@@ -32,7 +32,6 @@ constructor(props){
           method: "POST",
           data: datas
         }).then((res)=>{
-
           if(res.data.Identity ==="User"){
             sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("Identity", "User");
@@ -51,7 +50,7 @@ constructor(props){
             console.log(this.state.text);
           }else if(result === "wrongPw"){
             this.setState({text:"Wrong Password!!"})
-            document.getElementById("usernameinput").value="";
+            document.getElementById("Pwinput").value="";
           }
         });
 
