@@ -1,3 +1,7 @@
+/*
+I declare my reference regarding the xml import @ https://therichpost.com/reactjs-read-xml-file-data-working-demo/
+*/
+
 import './User.css';
 import XMLData from './Data/venues.xml';
 import axios from 'axios';
