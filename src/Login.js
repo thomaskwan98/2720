@@ -48,6 +48,7 @@ class Login extends Component {
                                                  <input type="text" name="Username" placeholder="Username" />
                                              </div>
                                         </div>
+                                        <br></br>
                                         <div class="col-md-12">
                                              <div className="input-group">
                                                  <label htmlFor="password">password</label>
