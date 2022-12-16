@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 import dataEventDates from './Data/eventDates.xml';
 import dataEvents from './Data/events.xml';
-import dataVenues from '.Data/venues.xml';
+import dataVenues from './Data/venues.xml';
 import XMLParser from 'react-xml-parser';
 
 const convert = require("xml2js");
@@ -17,8 +17,8 @@ class User extends React.Component{
   }
 componentDidMount() {
  //get data request
-  axios.get('/Data/venues.xml', {
-    "Content-Type": "application/xml; charset=utf-8"
+  axios.get(XMLData, {
+  "Content-Type": "application/xml; charset=utf-8"
    }).then(res => {
     //Storing users detail in state array object
     const jsonDataFromXml = new XMLParser().parseFromString(res.data);
@@ -31,9 +31,9 @@ return (
   <div className="container p-5">   
     <ul class="list-group"> 
     {(this.state.venue.map((item, index) => {
-    return (<li class="list-group-item">{item.value}</li>)}))}
+    return (<li class="list-group-item"> {item.value} </li>)}))}
     </ul>
-    </div>
+  </div>
 )
 };
 }
