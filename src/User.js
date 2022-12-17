@@ -25,14 +25,47 @@ let venues = [{venueName:[], venueId:[],
 
 class User extends React.Component{
 
-/*
+  /*
+  //event trail
+  constructor(props) {
+    super(props);
+    this.state = { eventModel: [] };
+  }
+    componentDidMount() {
+      //get data request
+       axios.get('http://localhost:5000/user')
+       .then(res => {
+        console.log(res.data);
+        this.setState({ eventModel: res.data });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
+    render() {
+      return (
+        <div className="container">
+          <ul class="list-group">
+            {this.state.eventModel.map( (data, i) => {
+              return(
+                <h1>{data.venue}</h1>
+              )
+            })}
+          </ul>
+        </div>
+      )
+
+  }
+  */
+
+//waiting for mongodb venue data
   constructor(props) {
     super(props);
     this.state = { venueModel: [] };
   }
   componentDidMount() {
     //get data request
-     axios.get('http://localhost:5000/')
+     axios.get('http://localhost:5000/user')
      .then(res => {
       console.log(res.data);
       this.setState({ venueModel: res.data });
@@ -44,19 +77,36 @@ class User extends React.Component{
 
   render() {
     return (
-        <div>
-            <p>
-              {this.state.venueModel.map( (data, i) => {
-              return(
-                <h1>{data.venuee}</h1>
-              )
-            })}
-              testing
-            </p>
-        </div>
+      <div className="container">
+      <ul class="list-group">
+        {this.state.venueModel.map( (data, i) => {
+        return (
+        <li class="list-group-item">
+          <div class="wrapper">
+            <div class="link_wrapper">
+              <a href='/events'>{data.locname}</a>
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
+                  <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </li>
+        )})}
+        </ul>
+      </div>
     )
   }
-*/
+
+
+/*
+
+          {this.state.venueModel.map( (data, i) => {
+            return(
+              <h1>{data.locname}</h1>
+            )
+          })}
 
   constructor(props) {
     super(props);
@@ -100,8 +150,7 @@ return (
   </div>
 )
 };
-
-
+*/
 }
 
 /*

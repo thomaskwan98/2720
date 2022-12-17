@@ -76,7 +76,7 @@ const venueSchema = Schema ({
     event: [{type: Schema.Types.ObjectId, ref:'eventModel'}],
 });
 
-const venueModel = mongoose.model('venues', venueSchema);
+const venueModel = mongoose.model('venus', venueSchema); //'venues' temporary
 
     app.post("/login", (req, res) => {
         console.log("in");
@@ -112,16 +112,30 @@ const venueModel = mongoose.model('venues', venueSchema);
         console.log('pass');
         //user action, table
 
-        //Find all docs that have at least two name array elements.
-        
-        venueModel
-        .find({ 'event.2': {$exists: true} })
+        /*
+        eventModel
+        //.find({ 'event.2': {$exists: true} })
+        .find({})
         .exec( (err, e) => {
             if (err) {res.send(err);}
             else {
                 res.send(e);
             }
         });
+        */
+
+        //Find all docs that have at least two name array elements.
+        venueModel
+        //.find({ 'event.2': {$exists: true} })
+        .find({})
+        //.populate('events')
+        .exec( (err, e) => {
+            if (err) {res.send(err);}
+            else {
+                res.send(e);
+            }
+        });
+        
     });
 
     app.get("/", (req, res) => {
