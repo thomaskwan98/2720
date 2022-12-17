@@ -237,12 +237,12 @@ class Comment extends React.Component {
 }
 
 const data = [
-  { id: 1, name: "Marco" },
-  { id: 2, name: "Lincoln" },
-  { id: 3, name: "Aya" }
+  { id: 1, name: "Event1" },
+  { id: 2, name: "Event2" },
+  { id: 3, name: "Event3" }
 ];
 
-export default function Favorite() {
+function Favorite() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
