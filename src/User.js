@@ -32,7 +32,7 @@ class User extends React.Component{
 
 componentDidMount() {
  //get data request
-  axios.get(XMLData, dataEvents, {
+  axios.get(XMLData, {
   "Content-Type": "application/xml; charset=utf-8"
    }).then(res => {
     //Storing users detail in state array object

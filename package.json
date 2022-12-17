@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "main":"server.js",
+  "main": "server.js",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -22,7 +22,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.5",
+    "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
     "react-xml-parser": "^1.1.8",
     "scss": "^0.2.4",
