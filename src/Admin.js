@@ -14,7 +14,7 @@ class Admin extends Component {
 
 render(){
 
-
+  console.log(sessionStorage.getItem("username"));
   let username = sessionStorage.getItem("username");
   let Identity = sessionStorage.getItem("Identity");
     if (Identity==="User") {

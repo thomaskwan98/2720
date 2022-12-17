@@ -8,55 +8,66 @@ const dem=()=> {
     function a() {
 
         axios({
-            url: "http://localhost:5000/xml",
+            url: "http://localhost:5000/xmlEvent",
             method: "POST",
           }).then((res)=>{
-            var array=[];
-            
-            var text= res.data.substring(res.data.indexOf("<venues>")+8);
-            
-            for(var i=0;i<text.split("</venue>").length - 2;i++){
+         
+            var num=0;
+            var text= res.data.substring(res.data.indexOf("<events>")+8);
+            for(var i=0;i<text.split("</event>").length - 2;i++){
               var temp;
-              temp= text.substring(0, text.indexOf("</venue>")+8);
-              var id = temp.substring(temp.indexOf("id=")+4, temp.indexOf(">")-1);
-              var vene= temp.substring(temp.indexOf("<venuee><![CDATA[")+17, temp.indexOf("]]></venuee>"));
-             if(temp.indexOf("<latitude>")>1){
-             var lat = temp.substring(temp.indexOf("<latitude><![CDATA[")+19, temp.indexOf("]]></latitude>"));
-             var long= temp.substring(temp.indexOf("<longitude><![CDATA[")+20, temp.indexOf("]]></longitude>"));
+              temp= text.substring(0, text.indexOf("</event>")+8);
+              
+              var eventId = temp.substring(temp.indexOf("id=")+4, temp.indexOf(">")-1);
+              
+              var title= temp.substring(temp.indexOf("<titlee><![CDATA[")+17, temp.indexOf("]]></titlee>"));
+  
+              var venu = temp.substring(temp.indexOf("<venueid><![CDATA[")+18, temp.indexOf("]]></venueid>"));
+  
+              var date =  temp.substring(temp.indexOf("<predateE><![CDATA[")+19, temp.indexOf("]]></predateE>"));
+              var time =  temp.substring(temp.indexOf("<progtimee><![CDATA[")+20, temp.indexOf("]]></progtimee>"));
+              var description=temp.substring(temp.indexOf("<desce><![CDATA[")+16, temp.indexOf("]]></desce>"));
+  
+              var presenter=temp.substring(temp.indexOf("<presenterorge><![CDATA[")+24, temp.indexOf("]]></presenterorge>"));
+              var price=temp.substring(temp.indexOf("<pricee><![CDATA[")+17, temp.indexOf("]]></pricee>"));
+             
+              if(temp.indexOf("<desce><![CDATA[")>1 && temp.indexOf("<presenterorge><![CDATA[")>1){
+                console.log(eventId);
+                console.log(title);
+                console.log(venu);
+                console.log(description);
+                console.log(date);
+                console.log(time);
+                console.log(presenter);
+                console.log(price);
 
-             console.log(id);
-             console.log(vene);
-             console.log(lat);
-             console.log(long);
-             //delete
-             axios({
-              url: "http://localhost:5000/clean_location",
-              method: "POST",
-            }).then((res)=>{
-            
-              
-            }).catch(e=>{
-             
-            });
-            // upload
-             axios({
-              url: "http://localhost:5000/venue_upload",
-              method: "POST",
-              data: {
-              id: id,
-              vene:vene,
-              lat:lat,
-              long:long
+                axios({
+                  url: "http://localhost:5000/events_upload",
+                  method: "POST",
+                  data: {
+                    eventId: eventId,
+                    title:title,
+                    venue:venu,
+                    description:description,
+                    date:date,
+                    time:time,
+                    presenter:presenter,
+                    price:price
+                  }
+                }).then((res)=>{
+         
+                  
+    
+                  console.log(res);
+                  
+                }).catch(e=>{
+                  console.log(e);
+                });
               }
-            }).then((res)=>{
-            
-              
-            }).catch(e=>{
              
-            });
-             }
-             
-             text= text.substring(text.indexOf("</venue>")+8);
+         
+  
+             text= text.substring(text.indexOf("</event>")+8);
             }
           
 

@@ -22,7 +22,6 @@ const login = new Schema({
     Identity :{ type: String, required: true},
     });
     const LocationSchema = mongoose.Schema({
-        // locname, latitude, longitude
         locId: {type: Number, required: true, unique: true},
         locname: {type: String, required: true, unique: true}, 
         latitude: {type: Number, required: true},
@@ -36,8 +35,8 @@ const login = new Schema({
         //title, venue, date/time, description, presenter, price
         eventId: {type: Number, required: true, unique: true},
         title: {type: String},
-        venue: {type: mongoose.Schema.Types.ObjectId, ref: 'Location'},
-        date: {type: Array},
+        venue: {type: mongoose.Schema.Types.ObjectId, ref: 'locations'},
+        date: {type: String},
         time: {type: String},
         description: {type: String},
         presenter: {type: String},
@@ -45,7 +44,7 @@ const login = new Schema({
     })
     const User = mongoose.model("logins", login);
     const Location = mongoose.model('locations', LocationSchema);
-    const Event = mongoose.model('Event', EventSchema);
+    const Event = mongoose.model('eventdatas', EventSchema);
 
     app.post("/login", (req, res) => {
         User.findOne(
@@ -120,5 +119,38 @@ const login = new Schema({
     
    
     });
+
+
+
+});
+
+app.post("/events_upload",(req,res)=>{
+
+    console.log(req.body['venue']);
+    Location.findOne({locId: req.body['venue']},function(err,e){
+        if(e){
+            Event.create({
+                eventId: req.body['eventId'],
+                title: req.body['title'],
+                venue: e._id,
+                description: req.body['description'],
+                date: req.body['date'],
+                time: req.body['time'],
+                presenter: req.body['presenter'],
+                price: req.body['price']
+                }, (err,e) => {
+                    if (err)
+                    console.log(err);
+                    else
+                    res.send(
+                        "ok"
+                    );
+                });
+        }    
+        res.send("ok");    
+    }
+ 
+    );
+   
 });
 app.listen(5000);

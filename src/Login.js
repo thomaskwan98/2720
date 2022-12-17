@@ -37,6 +37,7 @@ constructor(props){
             sessionStorage.setItem("Identity", "User");
             window.location.replace("http://localhost:3000/user");
           }else{
+            sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("Identity", "Admin");
             window.location.replace("http://localhost:3000/admin");
           }
