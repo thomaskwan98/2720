@@ -126,3 +126,149 @@ function User_() {
 }
 
 export default User;
+
+class App extends React.Component {
+  render() {
+    {/* <> fragment for >1 components */}
+    return (
+      <> 
+        <Title name={this.props.name}/>
+        <BrowserRouter>
+          <div>
+            <ul>
+              <li> <Link to="/">Home</Link> </li>
+              <li> <Link to="/singleevent">Page for single event</Link> </li>
+            </ul>
+          </div>
+
+          <hr />
+
+          <Routes>
+            <Route path="/" element={<Title />} />
+            <Route path="/singleevent" element={<Comment />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </BrowserRouter>
+      </>  
+    );
+  }
+}
+
+class Title extends React.Component {
+  render() {
+    return (
+      <header className="bg-warning">
+        <h1 className="display-4 text-center">{this.props.name}</h1>
+      </header>
+    );
+  }
+}
+
+class Comment extends React.Component {
+  render() {
+    return (
+      <footer>
+      <h3 id="comment">Feel free to leave some comments!</h3>
+      <div class="containercon">
+          <div id="comments"> 
+            <div id="c1001" class="d-flex">
+              <div class="flex-shrink-0">  
+                <svg height="100" width="100">
+                  <circle cx="50" cy="50" r="40" fill="green"/>
+                </svg>
+              </div>
+              <div class="flex-grow-1">  
+                <h5>1155141479@link.cuhk.edu.hk</h5>
+                <p>Email me if you want to tell me something directly.</p>
+              </div>
+            </div>
+          </div>
+          <hr></hr>
+          <h6>Add your comment:</h6>
+          <form>
+          <div class="mb-3">
+            <label for="new-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="new-email" placeholder="name@example.com"/>
+          </div>
+          <div class="mb-3">
+            <label for="new-comment" class="form-label">Comment</label>
+            <textarea class="form-control" id="new-comment" rows="3"></textarea>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="new-color" id="new-color-red" value="red"/>
+            <label class="form-check-label" for="new-color-red">Red</label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="new-color" id="new-color-green" value="green"/>
+              <label class="form-check-label" for="new-color-green">Green</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="new-color" id="new-color-yellow" value="yellow"/>
+              <label class="form-check-label" for="new-color-yellow">Yellow</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="new-color" id="new-color-blue" value="blue"/>
+              <label class="form-check-label" for="new-color-blue">Blue</label>
+            </div>
+          <button type="button" class="btn btn-primary" onclick="processform()">Add comment</button>
+          </form>
+        </div>
+      <h3>
+          <a href="#top">Back</a>
+      </h3>
+    </footer>
+  
+  
+    );
+  }
+}
+
+
+
+function processform() {
+  let newemail=document.querySelector("#new-email").value;
+  let newcomment=document.querySelector("#new-comment").value;
+  if(checkvalid(newemail)&&newemail.trim().length!==0&&newcomment.trim().length!==0){
+      let newComment = document.createElement("div");
+      let element = '<div><svg height="100" width="100"><circle cx="50" cy="50" r="40"></svg></div><div><h5></h5><p></p></div>';
+      newComment.innerHTML = element;
+      newComment.className = "d-flex";
+      newComment.querySelectorAll("div")[0].className = "flex-shrink-0"; 
+      newComment.querySelectorAll("div")[1].className = "flex-grow-1";  
+      let lastComment = document.querySelector("#comments").lastElementChild;  
+      newComment.id = 'c' + (Number(lastComment.id.substr(1)) + 1);
+      newComment.querySelector("h5").innerHTML =  newemail;
+      newComment.querySelector("p").innerHTML = newcomment;
+      let color = document.querySelectorAll("input[name=new-color]:checked")[0].value;  
+      newComment.querySelector("circle").setAttribute("fill", color);
+      document.querySelector("#comments").appendChild(newComment);
+      document.querySelector("form").reset();
+      savefile();
+  }else{
+      window.alert("You have entered an invalid email address or did there is empty email/comment!");
+  }
+}
+function checkvalid(newemail){
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(newemail.match(mailformat)){
+  return true;
+  }
+  else{
+  return false;
+  }
+}
+function loadfile() {
+  fetch('file.txt')
+  .then(res => res.text())
+  .then(txt => document.querySelector("#comments").innerHTML = txt);
+}
+
+function savefile() {
+  fetch('file.txt', {
+  method: 'PUT',
+  body: document.querySelector("#comments").innerHTML
+  });
+}
+
+const root = ReactDOM.createRoot(document.querySelector('#root'));
+root.render(<App name="CSCI2720 proj"/>);
