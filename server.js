@@ -11,7 +11,7 @@ const path =require('path');
 app.use(cors());
 const bcrypt = require('bcrypt'); // need "npm install bcrypt"
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://stu075:p492470W@cluster0.qsanyuv.mongodb.net/stu075'); // currently using my account
+mongoose.connect('mongodb+srv://stu060:p913492W@cluster0.wenbhsm.mongodb.net/stu060'); // currently using my account
 
 const login = mongoose.Schema({
     // userid: {type: Number, required: true, unique: true},
