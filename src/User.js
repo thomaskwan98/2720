@@ -11,13 +11,12 @@ import dataEventDates from './Data/eventDates.xml';
 import dataEvents from './Data/events.xml';
 import dataVenues from './Data/venues.xml';
 import XMLParser from 'react-xml-parser';
-
 const convert = require("xml2js");
 
 class User extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {venue:[],}      
+    this.state = {venue:[],update:false,delete:false}      
   }
 componentDidMount() {
  //get data request
@@ -30,13 +29,105 @@ componentDidMount() {
   }); 
 }
 
+Logout=(e)=>{
+  console.log("asddasas");
+  sessionStorage.clear();
+  window.location.replace("http://localhost:3000");
+};
+
 render() {
+  console.log(this.state.delete, this.state.update);
+  if (!this.state.delete){
+          //  delete
+          axios({
+            url: "http://localhost:5000/clean_location",
+            method: "POST",
+          }).then((res)=>{
+            console.log(res.data);
+            console.log("asdasd");
+        });
+
+    this.setState({delete:true});
+  }
+  if (this.state.delete ){
+    if(!this.state.update){
+      axios({
+        url: "http://localhost:5000/xml",
+        method: "POST",
+      }).then((res)=>{
+        var array=[];
+  
+        var text= res.data.substring(res.data.indexOf("<venues>")+8);
+        var num=0;
+        for(var i=0;i<text.split("</venue>").length - 2;i++){
+   
+          console.log(num);
+          var temp;
+          temp= text.substring(0, text.indexOf("</venue>")+8);
+          var id = temp.substring(temp.indexOf("id=")+4, temp.indexOf(">")-1);
+          var vene= temp.substring(temp.indexOf("<venuee><![CDATA[")+17, temp.indexOf("]]></venuee>"));
+         if(temp.indexOf("<latitude>")>1){
+         var lat = temp.substring(temp.indexOf("<latitude><![CDATA[")+19, temp.indexOf("]]></latitude>"));
+         var long= temp.substring(temp.indexOf("<longitude><![CDATA[")+20, temp.indexOf("]]></longitude>"));
+         num+=1;
+         console.log(id);
+         console.log(vene);
+         console.log(lat);
+         console.log(long);
+  
+        // upload
+         axios({
+          url: "http://localhost:5000/venue_upload",
+          method: "POST",
+          data: {
+          id: id,
+          vene:vene,
+          lat:lat,
+          long:long
+          }
+        }).then((res)=>{
+          console.log("on9");
+          console.log(res);
+          
+        }).catch(e=>{
+          console.log(e);
+        });
+         }
+         
+         text= text.substring(text.indexOf("</venue>")+8);
+         this.setState({update:true});
+        }
+      
+    
+    }).catch(e=>{
+    
+    });
+
+      
+      this.setState({update:true});
+    }
+
+}
+
+  console.log(sessionStorage.getItem("username"));
+  console.log (sessionStorage.getItem("Identity"));
+  let username = sessionStorage.getItem("username");
+  let Identity = sessionStorage.getItem("Identity");
+    if (Identity==="Admin") {
+      window.location.replace("http://localhost:3000/admin");
+    }else if(username===null){
+      window.location.replace("http://localhost:3000");
+    }
+    
 return (
   <div className="container">   
     <ul class="list-group"> 
+    <button onClick={this.Logout}>logout</button>
+    <></>
     {(this.state.venue.map((item, index) => {
     return (
-    <li class="list-group-item">
+    <>  
+      <li class="list-group-item">
       <div class="wrapper">
         <div class="link_wrapper">
           <a href="#">{item.value}</a>
@@ -48,75 +139,14 @@ return (
         </div>
       </div>
     </li>
+    </>
+
     )}))}
+    
     </ul>
   </div>
 )
 };
-}
-
-function User_() {
-  const [data, setData] = useState(Array.from({ length: 10 }, v => Array.from({ length: 5 }, v => null)));
-
-  var parseString = convert.parseString;
-
-  axios.get(XMLData, {
-    "Content-Type": "application/xml; charset=utf-8"
-  }).then(response => {
-    parseString(response.data, (err, result) => {
-      if(err) {
-       //Do something
-      } else {
-        let copy = [...data];
-        var i =0;
-        var j=0;
-        for (const key in result) {
-          var dataset=result[key];
-          for (const key in dataset) {
-            var venueSet =dataset[key];
-            for (const key in venueSet) {
-              var venue = venueSet[key];
-              for (const key in venue) {
-                var detail = venue[key];
-                for (const key in detail) {
-                  if(i<4){
-                    copy[j][i]=detail[key];
-                    i+=1;
-                  }else{
-                    i=0;
-                    j+=1;
-                  }
-                }
-              }
-            }
-          }
-        }
-        setData(copy);
-     }
-    });        
-  })
-
-  function print(i){
-    return(
-    <div>
-      <div>
-      {data[0][1]}
-      <br></br>
-      {data[0][2]}
-      </div>
-    </div>);
-  }
-
-  
-//make table
-
-  return (
-    <div className="User">
-      <header className="User-header">
-        <div>{print(0)}</div>
-      </header>
-    </div>
-  );
 }
 
 export default User;

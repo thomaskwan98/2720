@@ -6,23 +6,13 @@ import User from './User';
 import Admin from './Admin';
 import Dem from './dem';
 function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  function validateForm() {return email.length > 0 && password.length > 0;}
-  function handleSubmit(event) { event.preventDefault();}
-
   return (
     // Login page
     // User page
     // Admin page
 <BrowserRouter>
       <div>
-        <ul>
-          <li><Link to='/'>Login</Link></li>
-          <li><Link to='/user'>User page</Link></li>
-          <li><Link to='/admin'>Admin page</Link></li>
-          <li><Link to='/dem'>Dem</Link></li>
-        </ul>
+
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path='/user' element={<User/>} />

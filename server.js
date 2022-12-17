@@ -21,14 +21,33 @@ const login = new Schema({
     password : { type: String, required: true},
     Identity :{ type: String, required: true},
     });
-
+    const LocationSchema = mongoose.Schema({
+        // locname, latitude, longitude
+        locId: {type: Number, required: true, unique: true},
+        locname: {type: String, required: true, unique: true}, 
+        latitude: {type: Number, required: true},
+        longitude: {type: Number, required: true},
+        events: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
+        // favorite locations
+        // comments on locations
+    })
+    
+    const EventSchema = mongoose.Schema({ 
+        //title, venue, date/time, description, presenter, price
+        eventId: {type: Number, required: true, unique: true},
+        title: {type: String},
+        venue: {type: mongoose.Schema.Types.ObjectId, ref: 'Location'},
+        date: {type: Array},
+        time: {type: String},
+        description: {type: String},
+        presenter: {type: String},
+        price: {type: String}
+    })
     const User = mongoose.model("logins", login);
+    const Location = mongoose.model('locations', LocationSchema);
+    const Event = mongoose.model('Event', EventSchema);
 
     app.post("/login", (req, res) => {
-        console.log("in");
-
-        console.log(req);
-        console.log(req.body["name"]);
         User.findOne(
             {username: req.body["name"]}, (err, e) => {
                 if (err) {
@@ -55,23 +74,51 @@ const login = new Schema({
         });
 
 
-
-    app.post("/venue_upload",(req,res)=>{
+    app.post("/clean_location",(req,res)=>{
        console.log(req.body);
+       Location.deleteMany().then(
+        e=>{
+            res.send("deleted");
+        }
+       ).catch(err=>{
+        res.send(err);
+       })
     })
 
+    app.post("/venue_upload",(req,res)=>{
+
+        Location.create({
+            locId: req.body['id'],
+            locname: req.body['vene'],
+            latitude: req.body['lat'],
+            longitude: req.body['long']
+            }, (err,e) => {
+                if (err)
+                console.log(err);
+                else
+                res.send(
+                    "ok"
+                );
+            });
+});
+   
 
 
-
-    app.post('/xml', (req, res) => {
+    app.post('/xmlEvent', (req, res) => {
  
+        axios.get('https://www.lcsd.gov.hk/datagovhk/event/events.xml').then((response) => {
+           res.send(response.data);
+    });
+        
+
+    
+    });
+    app.post('/xml', (req, res) => {
+        console.log("addddd");
         axios.get('https://www.lcsd.gov.hk/datagovhk/event/venues.xml').then((response) => {
            res.send(response.data);
     
    
-            });
-        
     });
-
-
+});
 app.listen(5000);

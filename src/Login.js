@@ -40,6 +40,7 @@ constructor(props){
             sessionStorage.setItem("Identity", "Admin");
             window.location.replace("http://localhost:3000/admin");
           }
+          
         }).catch(e=>{
           let result = (e.response.data);
           console.log(e);
