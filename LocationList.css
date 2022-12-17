@@ -1,0 +1,65 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Arial";
+	font-size: 1 rem;
+	box-sizing: border-box;
+}
+
+.LocationList {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.table-container {
+	width: 90%;
+}
+
+.table-container table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table thead {
+	background-color: yellowgreen;
+}
+
+table th,
+table td {
+	padding: 10px;
+	text-align: left;
+	min-width: 100px;
+}
+
+table th {
+	color: #121212;
+}
+
+tr {
+	border-bottom: 1px solid #bbb;
+}
+
+.search-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #e26d5c;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	color: white;
+	box-shadow: 0.25rem 0.25rem 0rem #f0b2a8;
+	min-width: 90%;
+}
+
+.search-container input {
+	margin: 0 0.5rem 0 0.5rem;
+	min-width: 90%;
+	outline: none;
+	background-color: #e26d5c;
+	color: white;
+	border: none;
+}
+
