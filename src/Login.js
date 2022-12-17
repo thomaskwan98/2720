@@ -2,7 +2,6 @@
  import './Login.css';
  import axios from 'axios';
 
-
  
  class Login extends Component {
 constructor(props){
@@ -33,11 +32,27 @@ constructor(props){
           data: datas
         }).then((res)=>{
           if(res.data.Identity ==="User"){
+            axios({
+              url: "http://localhost:5000/getXML1",
+              method: "POST",
+            }).then((res)=>{});
+            axios({
+              url: "http://localhost:5000/getXML2",
+              method: "POST",
+            }).then((res)=>{});
+            axios({
+              url: "http://localhost:5000/getXML3",
+              method: "POST",
+            }).then((res)=>{});
+              
+         
             sessionStorage.setItem("username", res.data.username);
             sessionStorage.setItem("Identity", "User");
             window.location.replace("http://localhost:3000/user");
+            
           }else{
             sessionStorage.setItem("Identity", "Admin");
+            sessionStorage.setItem("username", res.data.username);
             window.location.replace("http://localhost:3000/admin");
           }
           

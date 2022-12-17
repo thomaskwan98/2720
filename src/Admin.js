@@ -26,7 +26,7 @@ render(){
     <div className="Admin">
       <header className="Admin-header">
       </header>
-    <button onClick={this.Logout}>asd</button>
+    <button onClick={this.Logout}>logout</button>
     </div>
   );
 }

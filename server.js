@@ -11,10 +11,13 @@ const https = require('https');
 const axios = require('axios');
 const { repeat } = require("rxjs");
 var DOMParser = require('xmldom');
+const fs = require('fs');
+const xml2js = require('xml2js');
 
 mongoose.set('strictQuery', true);
 
 mongoose.connect('mongodb+srv://stu060:p913492W@cluster0.wenbhsm.mongodb.net/stu060');
+
 
 const login = new Schema({
     username : { type: String, required: true},
@@ -36,8 +39,8 @@ const login = new Schema({
         //title, venue, date/time, description, presenter, price
         eventId: {type: Number, required: true, unique: true},
         title: {type: String},
-        venue: {type: mongoose.Schema.Types.ObjectId, ref: 'Location'},
-        date: {type: Array},
+        venue: {type: String},
+        date: {type: String},
         time: {type: String},
         description: {type: String},
         presenter: {type: String},
@@ -45,7 +48,7 @@ const login = new Schema({
     })
     const User = mongoose.model("logins", login);
     const Location = mongoose.model('locations', LocationSchema);
-    const Event = mongoose.model('Event', EventSchema);
+    const Event = mongoose.model('eventdatas', EventSchema);
 
     app.post("/login", (req, res) => {
         User.findOne(
@@ -84,6 +87,18 @@ const login = new Schema({
         res.send(err);
        })
     })
+    
+
+    app.post("/clean_event",(req,res)=>{
+        console.log(req.body);
+        Event.deleteMany().then(
+         e=>{
+             res.send("deleted");
+         }
+        ).catch(err=>{
+         res.send(err);
+        })
+     })
 
     app.post("/venue_upload",(req,res)=>{
 
@@ -121,4 +136,61 @@ const login = new Schema({
    
     });
 });
+
+
+app.post("/events_upload",(req,res)=>{
+    
+  
+        Location.findOne({locId: req.body['venu']},function(err,e){
+           if(e){
+            console.log(req.body['venu'], e.locId);
+                Event.create({
+                    eventId: req.body['eventId'],
+                    title: req.body['title'],
+                    venue: req.body['venu'],
+                    description: req.body['description'],
+                    date: req.body['date'],
+                    time: req.body['time'],
+                   presenter: req.body['presenter'],
+                    price: req.body['price']
+                    }, (err,e) => {
+                       
+                    });
+            }    
+        }
+     
+    );
+       
+     });
+
+
+
+     app.post('/getXML1', (req, res) => {
+        var dir= __dirname+'/src/Data/';
+        var file = fs.createWriteStream(dir + 'eventDates.xml', {'flags': 'w'});
+        const get = https.get("https://www.lcsd.gov.hk/datagovhk/event/eventDates.xml", (response) => {
+            var stream = response.pipe(file);
+        });
+    
+        
+    });
+    app.post('/getXML2', (req, res) => {
+        var dir= __dirname+'/src/Data/';
+        var file = fs.createWriteStream(dir + 'events.xml', {'flags': 'w'});
+        const get = https.get("https://www.lcsd.gov.hk/datagovhk/event/events.xml", (response) => {
+            var stream = response.pipe(file);
+           
+    });
+});
+    app.post('/getXML3', (req, res) => {
+        
+        var dir= __dirname+'/src/Data/';
+        
+        var file = fs.createWriteStream(dir + 'venues.xml', {'flags': 'w'});
+        const get = https.get("https://www.lcsd.gov.hk/datagovhk/event/venues.xml", (response) => {
+            var stream = response.pipe(file);
+
+        });
+        
+    });
 app.listen(5000);
