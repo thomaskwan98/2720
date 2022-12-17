@@ -1,0 +1,13 @@
+ 
+          <div id="c1001" class="d-flex"> <!-- flex layout -->
+            <div class="flex-shrink-0"> <!-- disallow div to shrink when page gets smaller -->
+              <svg height="100" width="100">
+                <circle cx="50" cy="50" r="40" fill="green">
+              </circle></svg>
+            </div>
+            <div class="flex-grow-1"> <!-- allow div to grow and take up all space -->
+              <h5>1155141479@link.cuhk.edu.hk</h5>
+              <p>Email me if you want to tell me something directly.</p>
+            </div>
+          </div>
+        <div class="d-flex" id="c1002"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="blue"></circle></svg></div><div class="flex-grow-1"><h5>ma@m.com</h5><p>12345</p></div></div><div class="d-flex" id="c1003"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="green"></circle></svg></div><div class="flex-grow-1"><h5>hua@hutao.com</h5><p>mask</p></div></div><div class="d-flex" id="c1004"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="yellow"></circle></svg></div><div class="flex-grow-1"><h5>mai@link.cuk.edu.hk</h5><p>have studied  for at least 15 hours.</p></div></div><div class="d-flex" id="c1005"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="blue"></circle></svg></div><div class="flex-grow-1"><h5>easy@ma.com</h5><p>qwdq</p></div></div><div class="d-flex" id="c1006"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="red"></circle></svg></div><div class="flex-grow-1"><h5>hhh@link.cuhk.edu.hk</h5><p>finish my a1</p></div></div><div class="d-flex" id="c1007"><div class="flex-shrink-0"><svg height="100" width="100"><circle cx="50" cy="50" r="40" fill="green"></circle></svg></div><div class="flex-grow-1"><h5>lalisa@i.com</h5><p>you</p></div></div>
