@@ -78,8 +78,6 @@ const venueSchema = Schema ({
 
 const venueModel = mongoose.model('venues', venueSchema);
 
-
-
     app.post("/login", (req, res) => {
         console.log("in");
 
@@ -110,6 +108,22 @@ const venueModel = mongoose.model('venues', venueSchema);
             });
         });
 
+    app.get('/user', (req, res) => {
+        console.log('pass');
+        //user action, table
+
+        //Find all docs that have at least two name array elements.
+        
+        venueModel
+        .find({ 'event.2': {$exists: true} })
+        .exec( (err, e) => {
+            if (err) {res.send(err);}
+            else {
+                res.send(e);
+            }
+        });
+    });
+
     app.get("/", (req, res) => {
         User.find({}, (err, e) => {
             if (err) {
@@ -118,20 +132,6 @@ const venueModel = mongoose.model('venues', venueSchema);
             else {
                 res.status(200);
                 res.send(e);
-            }
-        });
-    });
-
-    app.get('/user', (req, res) => {
-        //user action, table
-
-        //Find all docs that have at least two name array elements.
-        venueModel
-        .find({ 'event.2': {$exists: true} })
-        .exec( (err, item) => {
-            if (err) {res.send(err);}
-            else {
-                res.send(item.venuee + item.event.length);
             }
         });
     });

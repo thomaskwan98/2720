@@ -24,13 +24,47 @@ let venues = [{venueName:[], venueId:[],
 }];
 
 class User extends React.Component{
+
+/*
+  constructor(props) {
+    super(props);
+    this.state = { venueModel: [] };
+  }
+  componentDidMount() {
+    //get data request
+     axios.get('http://localhost:5000/')
+     .then(res => {
+      console.log(res.data);
+      this.setState({ venueModel: res.data });
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
+  render() {
+    return (
+        <div>
+            <p>
+              {this.state.venueModel.map( (data, i) => {
+              return(
+                <h1>{data.venuee}</h1>
+              )
+            })}
+              testing
+            </p>
+        </div>
+    )
+  }
+*/
+
   constructor(props) {
     super(props);
     this.state = {venueName:[], venues:[{venueName:[], venueId:[],
-    }], venueId:[], count:0}   
+    }], venueId:[], count:0};
   }
 
-componentDidMount() {
+ componentDidMount() {
  //get data request
   axios.get(XMLData, {
   "Content-Type": "application/xml; charset=utf-8"
@@ -46,7 +80,7 @@ componentDidMount() {
 render() {
 return (
   <div className="container">
-  <ul class="list-group"> 
+  <ul class="list-group">
     {(this.state.venueName.map((item, index) => {
     return (
     <li class="list-group-item">
@@ -66,8 +100,11 @@ return (
   </div>
 )
 };
+
+
 }
 
+/*
 function User_() {
   const [data, setData] = useState(Array.from({ length: 10 }, v => Array.from({ length: 5 }, v => null)));
 
@@ -131,8 +168,10 @@ function User_() {
     </div>
   );
 }
+*/
 
 export default User;
+
 class App extends React.Component {
   render() {
     {/* <> fragment for >1 components */}
