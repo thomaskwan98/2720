@@ -65,7 +65,7 @@ const eventSchema = Schema({
     video_link: {type: String},
 });
 
-const eventModel = mongoose.model("events", eventSchema);
+const eventModel = mongoose.model("eventdatas", eventSchema); //'events' temporary
 
 const venueSchema = Schema ({
     id: {type: String, required: true, unique:true},
@@ -73,10 +73,24 @@ const venueSchema = Schema ({
     venuee: {type: String, required: true},
     latitude: {type: String},
     longitude: {type: String},
-    event: [{type: Schema.Types.ObjectId, ref:'eventModel'}],
+    events: [{type: Schema.Types.ObjectId, ref:'eventModel'}],
 });
 
-const venueModel = mongoose.model('venus', venueSchema); //'venues' temporary
+const venueModel = mongoose.model('locations', venueSchema); //'venues' temporary
+
+//merge the two schemas by the shared id
+/*
+db.venueModel.aggregate([
+    { $lookup:
+        {
+           from: "events",
+           localField: "id",
+           foreignField: "venueid",
+           as: "events"
+        }
+    }
+]).pretty();
+*/
 
     app.post("/login", (req, res) => {
         console.log("in");
@@ -126,13 +140,23 @@ const venueModel = mongoose.model('venus', venueSchema); //'venues' temporary
 
         //Find all docs that have at least two name array elements.
         venueModel
-        //.find({ 'event.2': {$exists: true} })
+        //.find({ 'events.2': {$exists: true} })
         .find({})
         //.populate('events')
-        .exec( (err, e) => {
+        .exec( (err, venueItem) => {
             if (err) {res.send(err);}
             else {
-                res.send(e);
+                res.send(venueItem);
+                /*
+                eventModel
+                .find({})
+                .exec( (error, eventItem) => {
+                    if (error) {res.send(error);}
+                    else { 
+                        res.send(venueItem, eventItem);
+                    }
+                });
+                 */       
             }
         });
         
