@@ -52,11 +52,10 @@ class User extends React.Component{
           </ul>
         </div>
       )
-
   }
   */
 
-//waiting for mongodb venue data
+//fetching mongodb venue data
   constructor(props) {
     super(props);
     this.state = { venueModel: [] };
@@ -96,7 +95,6 @@ class User extends React.Component{
       </div>
     )
   }
-
 
 /*
 

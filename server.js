@@ -126,18 +126,6 @@ db.venueModel.aggregate([
         console.log('pass');
         //user action, table
 
-        /*
-        eventModel
-        //.find({ 'event.2': {$exists: true} })
-        .find({})
-        .exec( (err, e) => {
-            if (err) {res.send(err);}
-            else {
-                res.send(e);
-            }
-        });
-        */
-
         //Find all docs that have at least two name array elements.
         venueModel
         //.find({ 'events.2': {$exists: true} })
@@ -159,7 +147,18 @@ db.venueModel.aggregate([
                  */       
             }
         });
-        
+    });
+
+    app.get('/events', (req, res) => {
+        console.log('event testing');
+        eventModel
+        .find({})
+        .exec( (err, eventItem) => {
+            if (err) {res.send(err);}
+            else {
+                res.send(eventItem);
+            }
+        });
     });
 
     app.get("/", (req, res) => {
