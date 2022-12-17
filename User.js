@@ -1,6 +1,3 @@
-/*
-I declare my reference regarding the xml import @ https://therichpost.com/reactjs-read-xml-file-data-working-demo/
-*/
 import ReactDOM from "react-dom/client";
 import React from 'react';
 import {
@@ -12,14 +9,13 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
 import './User.css';
 import XMLData from './Data/venues.xml';
 import axios from 'axios';
  
 
 import dataEventDates from './Data/eventDates.xml';
-import dataEvents from './Data/events.xml';
+ 
 //import dataVenues from './Data/venues.xml';
 import XMLParser from 'react-xml-parser';
 
@@ -137,7 +133,6 @@ function User_() {
 }
 
 export default User;
-
 class App extends React.Component {
   render() {
     {/* <> fragment for >1 components */}
